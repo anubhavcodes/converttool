@@ -12,6 +12,7 @@ log = logging.getLogger('converttool.Format')
 
 class Format:
     """Base class to represent a format. 
+
     `Format` class is a delegator class, and it delegates the converting
     of data to the format to the implementing class, so that the api can
     use Format without caring about implementing classes. This reduces 
@@ -43,17 +44,22 @@ class Format:
 
     def __init__(self, output_format, csv_data, output_name=None, pretty=False, loglevel="notset"):
         """Method to initialize `Format`
-        The `output_format` can be lower case or upper case, but it should         match the naming convention of the implementing class as
-        discussed above. For eg:
+
+        The `output_format` can be lower case or upper case, but it should         
+        match the naming convention of the implementing class as discussed 
+        above. For eg:
+
             * If the implement class is `FormatJSON`, then the 
             output_format should be `json`.
             * If the implement class is `FormatXML`, then the 
             output_format should be `xml`.
+
         :param str output_format: the format in which the data needs to be
         converted. 
         :param List csv_data: Data parsed from csv as list of dictionaries
         :param str output_name: Name of the output file or None
         :param bool pretty: A boolean to specify pretty printing
+        
         """
         self.output_format = output_format
         self.csv_data = csv_data
@@ -66,12 +72,15 @@ class Format:
 
     def convert_data(self):
         """Method to convert data to the given format
+
         This method delegates the task of converting the data to the 
         class implementing the format in which the data is to be 
         converted. 
+        
         Any API that uses `Format` need not worry about the implementing
         classes, rather just uses `Format.convert_data()`. `Format` takes
         care of delegating the conversion to the right class.
+        
         """
         log.info('Finding the class to delegate')
         try:
@@ -89,6 +98,7 @@ class FormatJSON:
     Implementing Class. API should not use this class directly, but
     rather use `Format` with the `output_format` parameter set to 
     `json`
+    
     """
 
     log = logging.getLogger('converttool.FormatJSON')
@@ -112,6 +122,7 @@ class FormatXML:
     Implementing Class. API should not use this class directly, but
     rather use `Format` with the `output_format` parameter set to 
     `xml`
+    
     """
 
     log = logging.getLogger('converttool.FormatXML')

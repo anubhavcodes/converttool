@@ -14,13 +14,23 @@ import logging
 @click.argument('output_format', nargs=-1, required=True)
 @click.argument('csv', nargs=1)
 def main(output_name, pretty, strict, log, sort_key, output_format, csv):
+    """
+
+    Main entry point of `converttool`
+    :param str output_name: The name of the output file
+    :param bool pretty: Flag to set pretty print
+    :param bool strict: Flag to set strict validation
+    :param string log: The level of logging
+    :param string sort_key: Key to sort the data
+    :param tuple output_format: The formats in which to convert the data
+    :param str csv: Input csv file
+    """
     try:
         c = Converter(csv_file=csv, output_format=output_format, output_name=output_name, pretty=pretty, loglevel=log, strict=strict, sort_key=sort_key)
         c.convert()
         click.echo("Total Data Parsed: {}".format(c.get_total_data()))
     except CSVNotFound:
         click.echo("{} Not Found. Are you in the right directory?".format(csv))
-
     except FormatterNotFound:
         click.echo("{} is not supported yet. Can you add support to this format?".format(output_format))
     except ConversionError:

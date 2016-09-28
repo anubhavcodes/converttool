@@ -14,21 +14,21 @@ class Converter:
     
     Converter class takes the csv_file and the output format
     as input and converts the csv data into the required output
-    format. The output name is optional, and if not supplied, 
-    Converter will create the output with the name 
-    `output`.<format_name>
+    format. The output name is optional.
 
     """
     def __init__(self, csv_file, output_format, output_name=None, pretty=False, loglevel="notset", strict=False, sort_key=None):
         """Method to initialize converter
 
         :param str csv_file: Name of the csv file
-        :param str output_format: Format of the output
-        :param str output_name: Name of the output to be created. Defaults        to output.<format_name>, if a name is given, the tool will 
-        create files in the format <name>.<format_name>
+        :param tuple output_format: Format of the output
+        :param str output_name: Name of the output to be created. 
+        Defaults to output.<format_name>, if a name is given, 
+        the tool will create files in the format <name>.<format_name>
         :param bool pretty: A flag to specify pretty printing
         :param str loglevel: A loglevel for the logging module
         :param bool strict: Boolean for validation. If set, will raise 
+        :param str sort_key: key by which the data needs to be sorted
         ValidationError. False by default, and only removes 
 
         """
@@ -49,7 +49,7 @@ class Converter:
 
     def parse_csv(self):
         """Method to parse the csv and load the data"""
-        #TODO: convert into list comprehension
+        
         log.info("Parsing CSV")
         data = []
         try:
@@ -73,7 +73,8 @@ class Converter:
         log.info("Validating Data")
         data = self.data[::]
         for index, d in enumerate(data):
-            # Run all validators in on go
+            
+            # Run all validators in one go
             validate = all([Converter._is_rating_valid(d['stars']),
                     Converter._is_name_unicode(d['name']), 
                     Converter._is_uri_valid(d['uri'])])
@@ -91,7 +92,9 @@ class Converter:
     @classmethod
     def _is_rating_valid(cls, rating):
         """Method to check if the rating of a hotel is valid or invalid
+
         :param str rating: rating of the hotel 
+        :rtype bool True or False
         """
         if not isinstance(rating, unicode):
             raise ValueError("rating should be strictly unicode")
@@ -100,12 +103,14 @@ class Converter:
     @classmethod
     def _is_uri_valid(cls, uri):
         """Method to check if the uri is a valid uri or an invalid uri
+
         Rules to define an invalid url(keeing it simple):
             * The uri cannot contain any space 
             * If the uri contains `://` then it can start with only 
               http or https
             * uri should not end with a port number
             * Should contain atleast 1 period (For domain)
+
         """
         # URI's should be string
         if not isinstance(uri, unicode):
@@ -133,6 +138,10 @@ class Converter:
     @classmethod
     def _is_name_unicode(cls, name):
         """Method to check if the address is in unicode or plain ascii
+        
+        :param str name
+        :rtype bool True or False
+        
         """
         return isinstance(name, unicode)
 
