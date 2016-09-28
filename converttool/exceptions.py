@@ -11,11 +11,19 @@ class CSVNotFound(Error):
     pass
 
 class FormatterNotFound(Error):
-    """Exception raised when the pluggable implementation formatter class i       s not found
+    """Exception raised when the pluggable implementation formatter 
+    class is not found
     """
     pass
 
 class ConversionError(Error):
-    """Exception raised when there is an error converting and writing to 
-       output file"""
+    """Exception raised when there is an error converting and 
+    writing to output file"""
     pass
+
+class SettingsNotFound(Error):
+    """Exception raised when there is an error loading the settings 
+    file for dynamic validation"""
+
+class InvalidValidationSchema(Error):
+    """Exception raised when validate.json is invalid"""

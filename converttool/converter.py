@@ -1,7 +1,8 @@
 from converttool import *
 from converttool.formats import Format
 from converttool.exceptions import *
-from click import progressbar
+from converttool.validate import Validate
+from click import progressbar, echo
 import re
 import codecs
 import unicodecsv as csv
@@ -54,7 +55,7 @@ class Converter:
                 f.seek(0)
                 f_csv = csv.DictReader(f, encoding="utf-8")
                 with progressbar(f_csv,
-                        label="Reading from CSV\t",
+                        label="Reading CSV",
                         length=length) as bar:
                     for row in bar:
                         data.append(row)
@@ -76,6 +77,9 @@ class Converter:
                 else:
                     #Remove d from self.data
                     pass
+        echo("Running External Modifications")
+        errors = Validate(self.data).validate()
+        echo("{} Errors found in external validation".format(errors))
 
     @classmethod
     def _is_rating_valid(cls, rating):
@@ -129,7 +133,7 @@ class Converter:
         """Method to convert the csv data into the specified formats"""
         log.info("Converting to other formats")
         with progressbar(self.output_format,
-                label="Converting {}\t".format('|'.join(self.output_format)),
+                label="Converting {}".format('|'.join(self.output_format).upper()),
                 length=len(self.output_format)) as bar:
             for format in bar:
                 log.debug("Process for :{} format".format(format))
