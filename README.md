@@ -33,6 +33,10 @@ converttool --output-name result --log debug --sort stars --pretty json xml inpu
 converttool supports dynamic validations. To use dynamic validations, you need  to supply a schema either in ~/.config/validate.json or in validate.json in the project root directory. Check out ![cerberus validation schemas for more](http://docs.python-cerberus.org/en/stable/schemas.html)
 ```
 
+###Running tests
+
+`python setup.py test`
+
 ###Vagrant easy setup
 
 There is also a vagrant configuration file in utilities/ with instructions on how to get a vagrant box up and running within minutes, and have converttool installed in it. 
