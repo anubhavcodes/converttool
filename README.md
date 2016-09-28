@@ -9,13 +9,13 @@
   - Write the application interface [DONE]
   - Add logging [DONE]
   - Add validations [DONE]
-  - Generate Documentation
-  - Make setup.py
-  - Make installable
-  - Deploy in vagrant using vagrant file
-  - Deploy in docker using docker file
-  - Commit version 1
-  - Add mutliple formats as input
+  - Generate Documentation [DONE]
+  - Make setup.py [DONE]
+  - Make installable [DONE]
+  - Deploy in vagrant using vagrant file [DONE]
+  - Deploy in docker using docker file [DONE]
+  - Commit version 1 [DONE]
+  - Add mutliple formats as input [WIP]
   - Commit version 2
   - Write test case to fix unicode bug
   - Add mocking to tests, tempfile
@@ -32,3 +32,4 @@
   - Implement all the necessary class magic methods
   - Implement Sorting and Grouping
   - Fix logging bug
+  - Follow best practises for testing
