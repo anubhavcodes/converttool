@@ -33,7 +33,8 @@ setup(
     version='0.0.1',
     description='A tool to convert CSV into other formats',
     long_description=readme,
-    authors='Anubhav Yadav',
+    author='Anubhav Yadav',
+    author_email='anubhav1691@gmail.com',
     url='www.example.com',
     license=license,
     packages=['converttool'],
@@ -42,12 +43,10 @@ setup(
         'click==6.6',
         'unicodecsv==0.14.1',
     ],
-    tests_require=[
-        'pytest==3.0,2',
-    ],
+    tests_require='pytest==3.0.2',
     entry_points={
         'console_scripts':[
-            'converttool = converttool.app:main'
+            'converttool = converttool.app:main',
             ]
         },
     cmdclass={'test': PyTest},
