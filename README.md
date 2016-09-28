@@ -15,7 +15,7 @@
   - Deploy in vagrant using vagrant file [DONE]
   - Deploy in docker using docker file [DONE]
   - Commit version 1 [DONE]
-  - Add mutliple formats as input [WIP]
+  - Add mutliple formats as input [DONE]
   - Commit version 2
   - Write test case to fix unicode bug
   - Add mocking to tests, tempfile
@@ -32,4 +32,4 @@
   - Implement all the necessary class magic methods
   - Implement Sorting and Grouping
   - Fix logging bug
-  - Follow best practises for testing
+  - Follow best practises for testing [SKIPPED]
