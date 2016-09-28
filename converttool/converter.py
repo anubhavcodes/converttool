@@ -19,7 +19,7 @@ class Converter:
     `output`.<format_name>
 
     """
-    def __init__(self, csv_file, output_format, output_name=None, pretty=False, loglevel="notset", strict=False):
+    def __init__(self, csv_file, output_format, output_name=None, pretty=False, loglevel="notset", strict=False, sort_key=None):
         """Method to initialize converter
 
         :param str csv_file: Name of the csv file
@@ -43,6 +43,9 @@ class Converter:
         self.strict = strict
         self.validate_data()
         self.total_data = len(self.data)
+        if sort_key:
+            self.sort_key = sort_key
+            self._sort()
 
     def parse_csv(self):
         """Method to parse the csv and load the data"""
@@ -68,17 +71,20 @@ class Converter:
     def validate_data(self):
         """Method to validate the data read from the csv file"""
         log.info("Validating Data")
-        for d in self.data:
+        data = self.data[::]
+        for index, d in enumerate(data):
+            # Run all validators in on go
             validate = all([Converter._is_rating_valid(d['stars']),
                     Converter._is_name_unicode(d['name']), 
                     Converter._is_uri_valid(d['uri'])])
+
+            # Take decision what to do if not validated
             if not validate:
                 if self.strict:
                     raise ValidationError("Validation Failed. Please check your csv file for invalid names/stars/url")
                 else:
-                    #Remove d from self.data
-                    pass
-        echo("Running External Modifications")
+                    self.data.remove(d)
+        echo("Running External Validations")
         errors = Validate(self.data).validate()
         echo("{} Errors found in external validation".format(errors))
 
@@ -144,3 +150,13 @@ class Converter:
     def get_total_data(self):
         """Method to retun the total data parsed from csv"""
         return self.total_data
+
+    def _sort(self):
+        """Method to sort the data based on a given key"""
+        self.data = sorted(self.data, key = lambda k: k[self.sort_key])
+
+    def __repr__(self):
+        return '<CONVERTER>:<{}>:<{}>'.format(self.csv_file, '|'.join(self.output_format))
+
+    def __str__(self):  
+        return 'Converter Class: {}'.format('|'.join(self.output_format))

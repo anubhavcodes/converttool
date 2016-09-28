@@ -35,3 +35,9 @@ class Validate:
         if v.errors:
             errors+=1
         return errors
+
+    def __repr__(self):
+        return "Validator"
+
+    def __str__(self):  
+        return "Validator"

@@ -130,3 +130,9 @@ class FormatXML:
         except Exception:
             log.debug('There was an error in dumping to xml')
             raise ConversionError("There was an error converting to XML")
+
+    def __repr__(self):
+        return 'Formatter: {}'.format(self.output_format)
+
+    def __str__(self):  
+        return 'Formatter: {}'.format(self.output_format)

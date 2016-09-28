@@ -10,11 +10,12 @@ import logging
 @click.option('--pretty', default=False, is_flag=True, help='Pretty print the output. Disabled by default')
 @click.option('--strict', default=False, is_flag=True, help='Set strict validation, tool will stop if data is valid. False by default')
 @click.option('--log', default="notset", help='Enable logging for converttool', type=click.Choice(['info', 'debug', 'notset']))
+@click.option('--sort-key', default=None, help="Sort on the basis of a key", type=click.Choice(['name', 'address', 'stars', 'url', 'contact', 'phone']))
 @click.argument('output_format', nargs=-1)
 @click.argument('csv', nargs=1)
-def main(output_name, pretty, strict, log, output_format, csv):
+def main(output_name, pretty, strict, log, sort_key, output_format, csv):
     try:
-        c = Converter(csv_file=csv, output_format=output_format, output_name=output_name, pretty=pretty, loglevel=log, strict=strict)
+        c = Converter(csv_file=csv, output_format=output_format, output_name=output_name, pretty=pretty, loglevel=log, strict=strict, sort_key=sort_key)
         c.convert()
         click.echo("Total Data Parsed: {}".format(c.get_total_data()))
     except CSVNotFound:
