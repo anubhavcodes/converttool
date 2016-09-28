@@ -1,35 +1,56 @@
 ###Converter - A tool to convert data from csv to other formats. 
 
+###Installation
+
+	`python setup.py install`
+
+Please note that the above operation may need sudo
+
 ###Usage:
 
-`Work in progress`
-####TODO
-  - Add Exceptions [Done]
-  - Write test cases to check exceptions [Done]
-  - Write the application interface [DONE]
-  - Add logging [DONE]
-  - Add validations [DONE]
-  - Generate Documentation [DONE]
-  - Make setup.py [DONE]
-  - Make installable [DONE]
-  - Deploy in vagrant using vagrant file [DONE]
-  - Deploy in docker using docker file [DONE]
-  - Commit version 1 [DONE]
-  - Add mutliple formats as input [DONE]
-  - Commit version 2
-  - Write test case to fix unicode bug
-  - Add mocking to tests, tempfile
-  - Commit version 3
-  - Add plugabble validations 
-  - Commit version 4
-  - Add Statistics while conversion
-  - test
-  - Commit version 5
-  - Setup tox
-  - Test python version compatibility
-  - Commit version 6
-  - Try to fix the progressbar when dumping files (will be fixed when there will be multiple formats support)
-  - Implement all the necessary class magic methods
-  - Implement Sorting and Grouping
-  - Fix logging bug
-  - Follow best practises for testing [SKIPPED]
+```
+converttool --help
+
+Usage: converttool [OPTIONS] OUTPUT_FORMAT... CSV
+
+Options:
+  --output-name TEXT              Name of the output file without extension.
+                                  `output` by default
+  --pretty                        Pretty print the output. Disabled by default
+  --strict                        Set strict validation, tool will stop if
+                                  data is valid. False by default
+  --log [info|debug|notset]       Enable logging for converttool
+  --sort-key [name|address|stars|url|contact|phone]
+                                  Sort on the basis of a key
+  --help                          Show this message and exit.
+	
+examples:
+
+converttool json input.cvs
+
+converttool --output-name result --log debug --sort stars --pretty json xml input.csv
+```
+
+###Vagrant easy setup
+
+There is also a vagrant configuration file in utilities/ with instructions on how to get a vagrant box up and running within minutes, and have converttool installed in it. 
+
+###Features:
+  * Parsing and Validating of CSV as per the required rules
+  * Converts CSV into *two* formats `json` and `xml`
+  * Easy to add new formats without toucing the core api
+  * Unit test cases making converttool robust
+  * Ability to sort the csv on the basis of a key
+  * Exception Handling
+  * Full fledged command line utitlity with command line flags and progress bar. Easy to use help menu integrated
+  * Logging
+  * Support for dynamic and custom based Validations. Now you can validate data by providing a schema in validate.json (alpha)
+  * Documentations of api in reStructured text. Also available in html format in docs
+  * Installable as a command line utility to simulate posix standards
+  * Easily deployable vagrant box support
+  * Converttool accepts multiple formats at the same time.
+  * Sorting of data by providing a key on the command line.
+
+###Caveats
+
+Supports python 2.7 for now. Planned support for python 3. Lot of unicode to handle

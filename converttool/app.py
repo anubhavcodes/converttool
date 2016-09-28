@@ -11,7 +11,7 @@ import logging
 @click.option('--strict', default=False, is_flag=True, help='Set strict validation, tool will stop if data is valid. False by default')
 @click.option('--log', default="notset", help='Enable logging for converttool', type=click.Choice(['info', 'debug', 'notset']))
 @click.option('--sort-key', default=None, help="Sort on the basis of a key", type=click.Choice(['name', 'address', 'stars', 'url', 'contact', 'phone']))
-@click.argument('output_format', nargs=-1)
+@click.argument('output_format', nargs=-1, required=True)
 @click.argument('csv', nargs=1)
 def main(output_name, pretty, strict, log, sort_key, output_format, csv):
     try:
