@@ -42,6 +42,7 @@ class Converter:
         self.loglevel = loglevel
         self.strict = strict
         self.validate_data()
+        self.total_data = len(self.data)
 
     def parse_csv(self):
         """Method to parse the csv and load the data"""
@@ -139,3 +140,7 @@ class Converter:
                 log.debug("Process for :{} format".format(format))
             self.formatter = Format(output_format=format, csv_data=self.data, output_name=self.output_name, pretty=self.pretty, loglevel=self.loglevel)
             self.formatter.convert_data()
+    
+    def get_total_data(self):
+        """Method to retun the total data parsed from csv"""
+        return self.total_data

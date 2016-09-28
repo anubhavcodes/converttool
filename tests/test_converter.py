@@ -215,3 +215,8 @@ Non-Unicode,"63847 Lowe Knoll, East Maxine, WA 97030-4876",100,Dr. Sinda Wyman,1
             f.write(test_csv)
         self.assertRaises(ValidationError, Converter, 'test_validation.csv', 'json', strict=True)
         os.remove('test_validation.csv')
+
+    def test_get_total_data(self):
+        """Method to test get_total_data method of Converter"""
+        c = Converter(self.csv, 'json', 'data', True)
+        self.assertEqual(c.get_total_data(), 1)

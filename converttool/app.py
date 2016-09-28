@@ -14,7 +14,9 @@ import logging
 @click.argument('csv', nargs=1)
 def main(output_name, pretty, strict, log, output_format, csv):
     try:
-        Converter(csv_file=csv, output_format=output_format, output_name=output_name, pretty=pretty, loglevel=log, strict=strict).convert()
+        c = Converter(csv_file=csv, output_format=output_format, output_name=output_name, pretty=pretty, loglevel=log, strict=strict)
+        c.convert()
+        click.echo("Total Data Parsed: {}".format(c.get_total_data()))
     except CSVNotFound:
         click.echo("{} Not Found. Are you in the right directory?".format(csv))
 
