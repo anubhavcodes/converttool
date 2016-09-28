@@ -29,6 +29,8 @@ examples:
 converttool json input.cvs
 
 converttool --output-name result --log debug --sort stars --pretty json xml input.csv
+
+converttool supports dynamic validations. To use dynamic validations, you need  to supply a schema either in ~/.config/validate.json or in validate.json in the project root directory. Check out ![cerberus validation schemas for more](http://docs.python-cerberus.org/en/stable/schemas.html)
 ```
 
 ###Vagrant easy setup
