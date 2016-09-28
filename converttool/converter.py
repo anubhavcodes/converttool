@@ -54,7 +54,7 @@ class Converter:
                 f.seek(0)
                 f_csv = csv.DictReader(f, encoding="utf-8")
                 with progressbar(f_csv,
-                        label="Reading from CSV",
+                        label="Reading from CSV\t",
                         length=length) as bar:
                     for row in bar:
                         data.append(row)
@@ -127,7 +127,11 @@ class Converter:
 
     def convert(self):
         """Method to convert the csv data into the specified formats"""
-        #TODO Modify code to process multiple formats
         log.info("Converting to other formats")
-        self.formatter = Format(output_format=self.output_format, csv_data=self.data, output_name=self.output_name, pretty=self.pretty, loglevel=self.loglevel)
-        self.formatter.convert_data()
+        with progressbar(self.output_format,
+                label="Converting {}\t".format('|'.join(self.output_format)),
+                length=len(self.output_format)) as bar:
+            for format in bar:
+                log.debug("Process for :{} format".format(format))
+            self.formatter = Format(output_format=format, csv_data=self.data, output_name=self.output_name, pretty=self.pretty, loglevel=self.loglevel)
+            self.formatter.convert_data()

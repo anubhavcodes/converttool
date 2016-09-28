@@ -57,22 +57,22 @@ Jürgen-Gehringer,"63847 Lowe Knoll, East Maxine, WA 97030-4876",5,Dr. Sinda Wym
     
     def test_convert_data(self):
         """Method to test the conversion creates the right file"""
-        c = Converter(self.csv, 'json', 'data', True)
+        c = Converter(self.csv, ('json',), 'data', True)
         c.convert()
         self.assertTrue(os.path.exists('data.json'))
-        c = Converter(self.csv, 'xml', 'data', True)
+        c = Converter(self.csv, ('xml',), 'data', True)
         c.convert()
         self.assertTrue(os.path.exists('data.xml'))
 
     def test_convert_data_format(self):
-        c = Converter(self.csv, 'json', 'data', True)
+        c = Converter(self.csv, ('json',), 'data', True)
         c.convert()
         try:
             with open('data.json') as f:
                 json.load(f)
         except ValueError:
             self.fail("Invalid Json Format")
-        c = Converter(self.csv, 'xml', 'data', True)
+        c = Converter(self.csv, ('xml',), 'data', True)
         c.convert()
         try:
             with open('data.xml') as f:

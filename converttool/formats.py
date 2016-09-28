@@ -97,14 +97,11 @@ class FormatJSON:
     def convert_data(cls, output_name, data, pretty):
         log.info('Converting to json')
         try:
-            with progressbar(length=len(data), 
-                    label="Converting to JSON") as bar:
-                with codecs.open(output_name, 'w', encoding='utf-8') as f:
-                    if pretty:
-                        json.dump(data, f, indent=4, ensure_ascii=False)
-                    else:
-                        json.dump(data, f, ensure_ascii=False)
-                bar.update(len(data))
+            with codecs.open(output_name, 'w', encoding='utf-8') as f:
+                if pretty:
+                    json.dump(data, f, indent=4, ensure_ascii=False)
+                else:
+                    json.dump(data, f, ensure_ascii=False)
         except Exception as e:
             log.debug('There was an error in dumping to json')
             raise ConversionError("There was an error converting to JSON")
@@ -125,14 +122,11 @@ class FormatXML:
         xml = dicttoxml(data)
         dom = parseString(xml)
         try:
-            with progressbar(length=len(data), 
-                    label="Converting to XML") as bar:
-                with codecs.open(output_name, 'w', encoding='utf8') as f:
-                    if pretty:
-                        f.write(dom.toprettyxml())
-                    else:
-                        f.write(dom.toxml())
-                bar.update(len(data))
+            with codecs.open(output_name, 'w', encoding='utf8') as f:
+                if pretty:
+                    f.write(dom.toprettyxml())
+                else:
+                    f.write(dom.toxml())
         except Exception:
             log.debug('There was an error in dumping to xml')
             raise ConversionError("There was an error converting to XML")
