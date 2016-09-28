@@ -153,8 +153,8 @@ class Converter:
                 length=len(self.output_format)) as bar:
             for format in bar:
                 log.debug("Process for :{} format".format(format))
-            self.formatter = Format(output_format=format, csv_data=self.data, output_name=self.output_name, pretty=self.pretty, loglevel=self.loglevel)
-            self.formatter.convert_data()
+                self.formatter = Format(output_format=format, csv_data=self.data, output_name=self.output_name, pretty=self.pretty, loglevel=self.loglevel)
+                self.formatter.convert_data()
     
     def get_total_data(self):
         """Method to retun the total data parsed from csv"""
