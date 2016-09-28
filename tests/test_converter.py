@@ -2,6 +2,7 @@
 import unittest
 import os
 import json
+import tempfile
 from converttool.converter import Converter
 from converttool.exceptions import *
 from xml.etree import ElementTree as ET
@@ -9,9 +10,12 @@ from xml.etree import ElementTree as ET
 #TODO: Add tempfile and mocks
 class TestConverter(unittest.TestCase):
     """Tests for the Converter Class"""
+
+    tmpdir = tempfile.gettempdir()
+
     def setUp(self):
         """Setup test data if necessary"""
-        self.csv = os.path.join(os.getcwd(), 'test.csv')
+        self.csv = os.path.join(self.tmpdir, 'test.csv')
         test_csv = '''name,address,stars,contact,phone,uri
 Jürgen-Gehringer,"63847 Lowe Knoll, East Maxine, WA 97030-4876",5,Dr. Sinda Wyman,1-270-665-9933x1626,http://www.paucek.com/search.htm'''
         with open(self.csv, 'w') as f:
@@ -19,7 +23,6 @@ Jürgen-Gehringer,"63847 Lowe Knoll, East Maxine, WA 97030-4876",5,Dr. Sinda Wym
 
     def tearDown(self):
         """Destroy and rebuild data after every unit case"""
-        os.remove(self.csv)
         if os.path.exists('data.json'):
             os.remove('data.json')
         if os.path.exists('data.xml'):
