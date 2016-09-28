@@ -32,7 +32,7 @@ setup(
     name='converttool',
     version='0.0.1',
     description='A tool to convert CSV into other formats',
-    long_description=readme,
+    long_description='Convert CSV files to JSON, XML and other formats. Easy to add your own formats. Dynamic data validation',
     author='Anubhav Yadav',
     author_email='anubhav1691@gmail.com',
     url='www.example.com',
