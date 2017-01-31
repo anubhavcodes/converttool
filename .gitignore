@@ -93,3 +93,6 @@ ENV/
 *xml
 *json
 *csv
+
+.DS_Store
+arch.key
