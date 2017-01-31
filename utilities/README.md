@@ -35,7 +35,7 @@ vagrant-box
 
 4. You may also want to copy any csv to vagrant-box so that you can find it in the vm when it boots
 
-	`cp hotels.csv vagrant-box`
+	`cp test.csv vagrant-box`
 	
 *Note that since vagrant-box will be shared directory between the guest and the hosts, all the contents of `vagrant-box` will be available in the `/vagrant` directory of the guest.* 
 
